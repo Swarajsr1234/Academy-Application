@@ -1,6 +1,8 @@
 package com.academy.academy.controller;
 
 
+import com.academy.academy.dto.LoginRequest;
+import com.academy.academy.dto.LoginResponse;
 import com.academy.academy.dto.RegisterRequest;
 import com.academy.academy.dto.RegisterResponse;
 import com.academy.academy.repository.UserRepository;
@@ -24,6 +26,13 @@ public class AuthController {
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest request)
     {
         RegisterResponse response = authService.register(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request)
+    {
+        LoginResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
 
