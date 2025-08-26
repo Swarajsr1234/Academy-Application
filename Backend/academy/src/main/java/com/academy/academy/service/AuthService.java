@@ -4,15 +4,13 @@ import com.academy.academy.dto.LoginRequest;
 import com.academy.academy.dto.LoginResponse;
 import com.academy.academy.dto.RegisterRequest;
 import com.academy.academy.dto.RegisterResponse;
+import com.academy.academy.model.Role;
 import com.academy.academy.model.User;
 import com.academy.academy.repository.UserRepository;
 import com.academy.academy.security.JwtService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +36,7 @@ public class AuthService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
         String token = jwtService.generateToken(user);
         return new RegisterResponse("User Register Successfully.." , token);

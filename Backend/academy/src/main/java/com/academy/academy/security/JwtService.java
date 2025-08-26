@@ -25,7 +25,7 @@ public class JwtService {
         // basis of there role we need the map to save the key value pair
 
         Map<String , Object> claims = new HashMap<>(); // this is the map that we will use to add the custom data in our token
-        claims.put("role" , user.getRole());
+        claims.put("role" , user.getRole().name());
 
         return  createToken(claims , user.getEmail());
 
